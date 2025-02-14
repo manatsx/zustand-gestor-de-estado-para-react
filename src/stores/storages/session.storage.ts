@@ -1,15 +1,16 @@
-import { createJSONStorage, StateStorage } from "zustand/middleware";
+import { StateStorage, createJSONStorage } from "zustand/middleware";
 
-// Guarda en el session storage del navegador
 const storageApi: StateStorage = {
   getItem: function (name: string): string | Promise<string | null> | null {
     const data = sessionStorage.getItem(name);
     return data;
   },
+
   setItem: function (name: string, value: string): void {
     sessionStorage.setItem(name, value);
   },
-  removeItem: function (name: string): void | Promise<unknown> {
+
+  removeItem: function (name: string): void | Promise<void> {
     console.log("removeItem", name);
   },
 };

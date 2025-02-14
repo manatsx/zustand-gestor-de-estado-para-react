@@ -40,32 +40,13 @@ export const BlackBears = () => {
   );
 };
 
-export const PolarBears = () => {
-  const polarBears = useBearStore((state) => state.polarBears);
-  const increasePolarBears = useBearStore((state) => state.increasePolarBears);
-  // const { blackBears, increaseBlackBears  } = useBearStore(state => state);
-
-  return (
-    <WhiteCard centered>
-      <h2>Osos Negros</h2>
-
-      <div className="flex flex-col md:flex-row">
-        <button onClick={() => increasePolarBears(+1)}> +1</button>
-        <span className="text-3xl mx-2 lg:mx-10"> {polarBears} </span>
-        <button onClick={() => increasePolarBears(-1)}>-1</button>
-      </div>
-    </WhiteCard>
-  );
-};
-
 export const PandaBears = () => {
   const pandaBears = useBearStore((state) => state.pandaBears);
   const increasePandaBears = useBearStore((state) => state.increasePandaBears);
-  // const { blackBears, increaseBlackBears  } = useBearStore(state => state);
 
   return (
     <WhiteCard centered>
-      <h2>Osos Negros</h2>
+      <h2>Osos Panda</h2>
 
       <div className="flex flex-col md:flex-row">
         <button onClick={() => increasePandaBears(+1)}> +1</button>
@@ -76,8 +57,24 @@ export const PandaBears = () => {
   );
 };
 
-export function BearsDisplay() {
-  // useShallow analiza las propiedades del objeto bears para volverlo a renderizar
+export const PolarBears = () => {
+  const polarBears = useBearStore((state) => state.polarBears);
+  const increasePolarBears = useBearStore((state) => state.increasePolarBears);
+
+  return (
+    <WhiteCard centered>
+      <h2>Osos Polares</h2>
+
+      <div className="flex flex-col md:flex-row">
+        <button onClick={() => increasePolarBears(+1)}> +1</button>
+        <span className="text-3xl mx-2 lg:mx-10"> {polarBears} </span>
+        <button onClick={() => increasePolarBears(-1)}>-1</button>
+      </div>
+    </WhiteCard>
+  );
+};
+
+export const BearsDisplay = () => {
   const bears = useBearStore(useShallow((state) => state.bears));
   // const bears = useBearStore( state => state.bears );
   const doNothing = useBearStore((state) => state.doNothing);
@@ -98,4 +95,4 @@ export function BearsDisplay() {
       <pre>{JSON.stringify(bears, null, 2)}</pre>
     </WhiteCard>
   );
-}
+};

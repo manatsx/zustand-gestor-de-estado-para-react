@@ -4,6 +4,7 @@ import { usePersonStore } from "../../stores";
 export const PersonPage = () => {
   const firstName = usePersonStore((state) => state.firstName);
   const lastName = usePersonStore((state) => state.lastName);
+
   const setFirstName = usePersonStore((state) => state.setFirstName);
   const setLastName = usePersonStore((state) => state.setLastName);
 
@@ -28,7 +29,7 @@ export const PersonPage = () => {
                     type="text"
                     name="firstName"
                     id="firstName"
-                    placeholder="Nombre"
+                    placeholder="Primer Nombre"
                     value={firstName}
                     onChange={(e) => setFirstName(e.target.value)}
                   />
