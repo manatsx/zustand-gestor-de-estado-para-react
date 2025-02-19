@@ -1,25 +1,22 @@
 import { StateCreator, create } from "zustand";
-import { v4 as uuidv4 } from "uuid";
-
-import { devtools, persist } from "zustand/middleware";
-// import { produce } from 'immer';
-
-import type { Task, TaskStatus } from "../../interfaces";
 import { immer } from "zustand/middleware/immer";
+import { devtools, persist } from "zustand/middleware";
+import { v4 as uuidv4 } from "uuid";
+// import { produce } from 'immer';
+import type { Task, TaskStatus } from "../../interfaces";
 
 interface TaskState {
   draggingTaskId?: string;
   tasks: Record<string, Task>; // { [key: string]: Task },
-
   getTaskByStatus: (status: TaskStatus) => Task[];
   addTask: (title: string, status: TaskStatus) => void;
-
   setDraggingTaskId: (taskId: string) => void;
   removeDraggingTaskId: () => void;
   changeTaskStatus: (taskId: string, status: TaskStatus) => void;
   onTaskDrop: (status: TaskStatus) => void;
 }
 
+// https://docs.pmnd.rs/zustand/getting-started/introduction
 const storeApi: StateCreator<TaskState, [["zustand/immer", never]]> = (
   set,
   get
@@ -45,7 +42,7 @@ const storeApi: StateCreator<TaskState, [["zustand/immer", never]]> = (
     });
 
     //? Requiere npm install immer
-    // set( produce( (state: TaskState) => {
+    // set(produce((state: TaskState) => {
     //   state.tasks[newTask.id] = newTask;
     // }))
 
@@ -67,8 +64,8 @@ const storeApi: StateCreator<TaskState, [["zustand/immer", never]]> = (
   },
 
   changeTaskStatus: (taskId: string, status: TaskStatus) => {
-    const task = { ...get().tasks[taskId] };
-    task.status = status;
+    const task = { ...get().tasks[taskId] }; // encontrar el id
+    task.status = status; // status del task
 
     set((state) => {
       state.tasks[taskId] = {
@@ -98,5 +95,3 @@ const storeApi: StateCreator<TaskState, [["zustand/immer", never]]> = (
 export const useTaskStore = create<TaskState>()(
   devtools(persist(immer(storeApi), { name: "task-store" }))
 );
-
-// task-store

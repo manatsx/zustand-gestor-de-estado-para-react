@@ -16,6 +16,7 @@ export const useTasks = ({ status }: Options) => {
   const [onDragOver, setOnDragOver] = useState(false);
 
   const handleAddTask = async () => {
+    // Crea una alerta con un input
     const { isConfirmed, value } = await Swal.fire({
       title: "Nueva tarea",
       input: "text",
